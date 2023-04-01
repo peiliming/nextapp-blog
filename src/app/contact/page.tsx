@@ -1,9 +1,9 @@
-import styles from './page.module.css'
+import '../globals.css'
 
 const Contact = () => {
   return (
-    <div className={styles.container}>
-      Hello Contact
+    <div>
+      <h1 className="text-3xl font-bold underline">Hello Contact</h1>
     </div>
   )
 }
