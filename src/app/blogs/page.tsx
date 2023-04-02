@@ -1,5 +1,5 @@
 import { NextPage } from 'next'
-import BlogCard from '@/components/BlogCard'
+import BlogCard from '@/app/components/BlogCard'
 
 interface Props {}
 
