@@ -1,3 +1,10 @@
+---
+title: This is a title3
+slug: how-to-use-useEffect-hook
+meta: If you stay up to date with niche software news
+---
+
+how-to-use-useEffect-hook
 If you stay up to date with niche software news, your ears may recently have twitched at the release of a new programming language: V.
 
 New hobby-project programming languages are released all the time, you would correctly argue; what makes this one special?
