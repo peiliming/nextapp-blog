@@ -26,10 +26,13 @@ export async function getData() {
   return res.json()
 }
 
-//type Props = InferGetStaticPropsType<typeof getData>
-interface Props {}
+const data: PostApiResponse = await getData()
 
-const Blogs: NextPage<Props> = ({ posts }) => {
+type Props = InferGetStaticPropsType<typeof data>
+// interface Props {
+// }
+
+const Blogs: NextPage<Props> = ({ data }) => {
   return (
     <div className="max-w-3xl mx-auto p-5 space-y-5">
       {posts.map((post) => (
