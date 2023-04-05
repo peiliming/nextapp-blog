@@ -13,31 +13,56 @@ export async function generateStaticParams() { // getStaticPaths()の置き換�
   const paths = dirs.map((filename) => {
     const filePathToRead = path.join(process.cwd(), 'posts/' + filename)
     const fileContent = fs.readFileSync(filePathToRead, {encoding: 'utf-8'})
-    return [
-      { postSlug: matter(fileContent).data.slug }
-    ]
+    // return [
+    //   { postSlug: matter(fileContent).data.slug,
+    //   fallback: false }
+    // ]
+    return {
+      params: {
+        postSlug: matter(fileContent).data.slug,
+      }
+    
+    }
   })
-  return paths
-}
-
-export async function getData(context: any) {
-  const { postSlug } = context
-  const filePathToRead = path.join(process.cwd(), `posts/${postSlug}.md`)
-  const fileContent = fs.readFileSync(filePathToRead, {encoding: 'utf-8'})
-  const {content, data} = matter(fileContent)
-
+  console.log(paths)
   return {
-    content,
-    title: data.title
+    paths
   }
 }
 
-const SinglePage: NextPage<Props> = async ({ content, title}) => {
+const slugs = await generateStaticParams()
+
+
+// export async function getData(slug) { 
+//   const slug = slugs.map((slug) => {
+//     const filePathToRead = path.join(process.cwd(), `posts/${slug.postSlug}.md`)
+//     const fileContent = fs.readFileSync(filePathToRead, {encoding: 'utf-8'})
+
+
+//     const {content, data} = matter(fileContent)
+//     return {
+//       content,
+//       title: data.title
+//     }
+//   })
+  
+//   return slug
+// }
+
+
+
+const SinglePage: NextPage<Props> = async () => {
+
   return (
-    <div>
-      <h1>{title}</h1>
-      <p>{content}</p>
-    </div>
+  //   <div>
+  //     {data}
+  //     <h1>{data.title}</h1>
+  //     <p>{data.content}</p>
+  //   </div>
+  
+  <div>
+    <h1>single page</h1>
+  </div>
   )
 }
 
