@@ -3,12 +3,19 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
-interface Props {}
+interface Props {
+}
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { params } = context
+  const { postSlug } = params as any
+  const filePathToRead = path.join(process.cwd(), `posts/${postSlug}.md`)
+  const fileContent = fs.readFileSync(filePathToRead, {encoding: 'utf-8'})
+  const {content, data} = matter(fileContent)
   return {
     props: {
-
+      content,
+      title: data.title
     }
   }
 }
@@ -27,8 +34,11 @@ export const getStaticPaths: GetStaticPaths = () => {
   }
 } 
 
-const SinglePage: NextPage<Props> = () => {
-  return (<div>SinglePage</div>)
+const SinglePage: NextPage<Props> = (props) => {
+  return (<div>
+    <h1>{props.title}</h1>
+    <p>{props.content}</p>
+  </div>)
 }
 
 export default SinglePage
