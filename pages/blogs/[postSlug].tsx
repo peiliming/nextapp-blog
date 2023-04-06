@@ -55,9 +55,11 @@ export const getStaticPaths = () => {
 const SinglePage: NextPage<Props> = ({post}) => {
   const {content, title} = post
   return (<div className='max-w-3xl mx-auto'>
-    <h1>{title}</h1>
+    <h1 className='front-semibold text-2xl py-5'>{title}</h1>
     {/* <p>{props.post.content}</p> */}
-    <MDXRemote {...content} />
+    <div className='prose pb-20'>
+      <MDXRemote {...content} />
+    </div>
   </div>)
 }
 

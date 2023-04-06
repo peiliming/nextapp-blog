@@ -21,6 +21,7 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.14",
     "gray-matter": "^4.0.3",
     "postcss": "^8.4.21",
