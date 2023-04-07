@@ -6,6 +6,7 @@ import { ParsedUrlQuery } from 'querystring'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 // next-mdx-remote: https://fuyu.hatenablog.com/entry/2021/01/17/235610
 import { serialize } from 'next-mdx-remote/serialize'
+import { useRouter } from 'next/router'
 
 type Props = InferGetStaticPropsType<typeof getStaticProps>
 interface StaticProps extends ParsedUrlQuery {
@@ -48,11 +49,16 @@ export const getStaticPaths: GetStaticPaths = () => {
   })
   return {
     paths,
-    fallback: false
+    fallback: 'blocking' // fallback options
   }
 } 
 
 const SinglePage: NextPage<Props> = ({post}) => {
+  // const router = useRouter()
+  // if(router.isFallback) {
+  //   return <p>Loading...</p>
+  // }
+
   const {content, title} = post
   return (<div className='max-w-3xl mx-auto'>
     <h1 className='front-semibold text-2xl py-5'>{title}</h1>
