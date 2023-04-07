@@ -21,20 +21,26 @@ interface Post {
 }
 
 export const getStaticProps: GetStaticProps<Post> = async (context) => {
-  const { params } = context
-  const { postSlug } = params as StaticProps
-  const filePathToRead = path.join(process.cwd(), `posts/${postSlug}.md`)
-  const fileContent = fs.readFileSync(filePathToRead, {encoding: 'utf-8'})
-  // const {content, data} = matter(fileContent)
-  // const source = await serialize(content)
-  //const { compiledSource, frontmatter }: any = await serialize(fileContent, {parseFrontmatter: true})
-  const source: any = await serialize(fileContent, {parseFrontmatter: true})
-  return {
-    props: {
-      post: {
-        content: source,
-        title: source.frontmatter.title
+  try {
+    const { params } = context
+    const { postSlug } = params as StaticProps
+    const filePathToRead = path.join(process.cwd(), `posts/${postSlug}.md`)
+    const fileContent = fs.readFileSync(filePathToRead, {encoding: 'utf-8'})
+    // const {content, data} = matter(fileContent)
+    // const source = await serialize(content)
+    //const { compiledSource, frontmatter }: any = await serialize(fileContent, {parseFrontmatter: true})
+    const source: any = await serialize(fileContent, {parseFrontmatter: true})
+    return {
+      props: {
+        post: {
+          content: source,
+          title: source.frontmatter.title
+        }
       }
+    }
+  } catch(error) {
+    return {
+      notFound: true
     }
   }
 }
