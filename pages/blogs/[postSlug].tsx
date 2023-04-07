@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps<Post> = async (context) => {
   }
 }
 
-export const getStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = () => {
   const dirPathToRead = path.join(process.cwd(), 'posts')
   const dirs = fs.readdirSync(dirPathToRead)
   const paths = dirs.map((filename) => {
