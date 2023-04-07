@@ -1,16 +1,11 @@
 import { GetStaticProps, NextPage, InferGetStaticPropsType } from 'next'
 import BlogCard from '@/components/BlogCard'
-
-interface PostApiResponse {
-  postInfo: {
-    title: string
-    meta: string
-    slug: string
-  }[]
-}
+import { readPostsInfo } from '@/lib/helper'
+import { PostApiResponse } from '@/utils/types'
 
 export const getStaticProps = async () => {
-  const { postInfo }: PostApiResponse = await fetch('http://localhost:3000/api/posts').then((data) => data.json())
+  //const { postInfo }: PostApiResponse = await fetch('http://localhost:3000/api/posts').then((data) => data.json())
+  const postInfo: PostApiResponse = readPostsInfo()
   return {
     props: {
       posts: postInfo
