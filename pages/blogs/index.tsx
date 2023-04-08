@@ -12,7 +12,7 @@ export type PostApiResponse = {
   }[]
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const { postInfo }: PostApiResponse = await fetch('http://localhost:3000/api/posts').then((data) => data.json())
   //const postInfo: PostApiResponse = readPostsInfo()
   return {
@@ -22,7 +22,7 @@ export const getStaticProps = async () => {
   }
 }
 
-type Props = InferGetStaticPropsType<typeof getStaticProps>
+type Props = InferGetStaticPropsType<typeof getServerSideProps>
 
 const Blogs: NextPage<Props> = ({ posts }) => {
   return (
